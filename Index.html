@@ -1,45 +1,110 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://unpkg.com/vue@next"></script>
-    <link rel="stylesheet" href="./Assets/Style.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./Assets/Style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
     <title>Document</title>
-</head>
-<body style="background-color: #770600;">
+  </head>
+
+  <body style="background-color: #770600">
     <div id="app">
-        <!-- navbar -->
-        
-        <div class="p-3">
-            <div class="container">
-                <img src="./Assets/images/Logo.png" alt="Logo" width="80" height="80">
-                <p class="Nav-bar-text">SpejlFarver</p>
+      <!-- navbar -->
+      <div class="p-3">
+        <div class="container">
+          <img
+            src="./Assets/images/Logo.png"
+            alt="Logo"
+            width="80"
+            height="80"
+          />
+          <p class="Nav-bar-text">SpejlFarver</p>
+          <button type="button" class="btn btn-primary Nav-bar-text">
+            <i class="fas fa-shopping-cart"></i>
+            {{ cart }}
+          </button>
+        </div>
+      </div>
+
+      <!--Product-->
+      <div class="product-display">
+        <div class="container">
+          <div class="row">
+            <div class="product-image">
+              <!-- Billede her-->
+              <img :src="image" alt="Logo" height="500" width="500" />
             </div>
+
+            <!-- displays prroducts info and stock/ out of stock -->
+            <div class="product-info">
+              <h1>{{ product }}</h1>
+              <p v-if="inventory > 10" class="stock" style="color: green">
+                In stock
+              </p>
+              <p
+                v-else-if="inventory <= 10 && inventory > 0"
+                class="stock"
+                style="color: yellow"
+              >
+                Alomst sold out
+              </p>
+              <p v-else class="stock" style="color: red">Out of stock</p>
+
+              <!-- Detials -->
+              <ul>
+                <li class="stock" v-for="detail in details">{{ detail }}</li>
+              </ul>
+              <div
+                class="stock"
+                v-for="variants in variants"
+                :key="variants.id"
+                @mouseover="updateImage(variants.image)"
+              >
+                {{ variants.var }}
+              </div>
+
+              <!-- add to cart -->
+              <button
+                type="button"
+                class="btn btn-primary"
+                :class="{ disabledButton: !inStock }"
+                :disabled="!inStock"
+                @click="addToCart"
+                style="margin-left: 20px"
+              >
+                add to cart
+              </button>
+
+              <!-- remove from cart-->
+              <button
+                type="button"
+                class="btn btn-outline-danger"
+                style="margin-left: 20px"
+                v-if="cart > 0"
+                @click="removeFromCart"
+              >
+                remove from cart
+              </button>
+            </div>
+          </div>
         </div>
-        
-        <!--Product-->
-        <div class="product-display">
-            <div class="container">
-                <div class="row">
-                        <div class="product-image">
-                            <!-- Billede her-->
-                            <img :src="image" alt="Logo" height="500" width="500">                        
-                        </div>
-                        <div class="product-info">
-                            <h1>{{ product }}</h1>
-                            <p v-if="inStock" class="stock">In stock</p>
-                            <p v-else class="stock">Out of stock</p>
-                        </div>
-                    </div>
-                </div>
-        </div>
+      </div>
     </div>
 
     <!-- installise app-->
     <script src="./Main.js"></script>
-
-</body>
+  </body>
 </html>
