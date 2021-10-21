@@ -38,73 +38,22 @@
           </button>
         </div>
       </div>
-
-      <!--Product-->
-      <div class="product-display">
-        <div class="container">
-          <div class="row">
-            <div class="product-image">
-              <!-- Billede her-->
-              <img :src="image" alt="Logo" height="500" width="500" />
-            </div>
-
-            <!-- displays prroducts info and stock/ out of stock -->
-            <div class="product-info">
-              <h1>{{ product }}</h1>
-              <p v-if="inventory > 10" class="stock" style="color: green">
-                In stock
-              </p>
-              <p
-                v-else-if="inventory <= 10 && inventory > 0"
-                class="stock"
-                style="color: yellow"
-              >
-                Alomst sold out
-              </p>
-              <p v-else class="stock" style="color: red">Out of stock</p>
-
-              <!-- Detials -->
-              <ul>
-                <li class="stock" v-for="detail in details">{{ detail }}</li>
-              </ul>
-              <div
-                class="stock"
-                v-for="variants in variants"
-                :key="variants.id"
-                @mouseover="updateImage(variants.image)"
-              >
-                {{ variants.var }}
-              </div>
-
-              <!-- add to cart -->
-              <button
-                type="button"
-                class="btn btn-primary"
-                :class="{ disabledButton: !inStock }"
-                :disabled="!inStock"
-                @click="addToCart"
-                style="margin-left: 20px"
-              >
-                add to cart
-              </button>
-
-              <!-- remove from cart-->
-              <button
-                type="button"
-                class="btn btn-outline-danger"
-                style="margin-left: 20px"
-                v-if="cart > 0"
-                @click="removeFromCart"
-              >
-                remove from cart
-              </button>
-            </div>
-          </div>
-        </div>
+      <div>
+          <product-display></product-display>
+          <product-display></product-display>
+          <product-display></product-display>
       </div>
-    </div>
 
-    <!-- installise app-->
+
+    <!-- installise app -->
     <script src="./Main.js"></script>
+    
+    <!-- installise components -->
+    <script src="./Components/ProductDisplay.js"></script>
+
+    <!--mount app-->
+    <script>
+        const mountedApp = app.mount('#app')
+    </script>
   </body>
 </html>

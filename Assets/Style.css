@@ -28,6 +28,9 @@ h1 {
   cursor: not-allowed !important;
 }
 
+.page {
+  margin: 20px;
+}
 /*.product-info {
   text-align: right;
 }*/
