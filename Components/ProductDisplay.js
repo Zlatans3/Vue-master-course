@@ -70,6 +70,8 @@ app.component('product-display', {
         </div>
       </div>
     </div>
+    <app-review @review-submitted="addReview"></app-review>
+    
   </div>
 </div>`,
 
@@ -83,7 +85,7 @@ data: function() {
             {id: 1, var: 'circle', image: './assets/images/Circle.jpg', stk: 12},
             {id: 2, var: 'nocircle', image: './assets/images/NoCircle.jpg', stk: 0},
         ],
-        
+        reviews: []
     }
 },
 methods: {
@@ -97,6 +99,9 @@ methods: {
     removeFromCart(){
         this.$emit('remove-from-cart')
         this.variants[this.selectedVars].stk += 1
+    },
+    addReview(review){
+      this.reviews.push(review)
     }
 },
 computed:{
