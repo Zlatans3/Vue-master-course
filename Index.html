@@ -4,20 +4,24 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="./Assets/images/favicon.ico"/>
+    
+    <!-- tilføjer Vue 3.0 -->
     <script src="https://unpkg.com/vue@next"></script>
+    <!-- tilføjer font awesome 6.0.0 -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css"
     />
     <link rel="stylesheet" href="./Assets/Style.css" />
-
+    <!-- tilføjer bootstrap -->
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
       integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
       crossorigin="anonymous"
     />
-    <title>Document</title>
+    <title>SpejlFarver</title>
   </head>
 
   <body style="background-color: #770600">
@@ -34,22 +38,24 @@
           <p class="Nav-bar-text">SpejlFarver</p>
           <button type="button" class="btn btn-primary Nav-bar-text">
             <i class="fas fa-shopping-cart"></i>
-            {{ cart }}
+            {{ cart.length }}
           </button>
         </div>
       </div>
       <div>
+          <product-display :premium="premium" @add-to-cart="updateCart" @remove-from-cart="removeFromCart"></product-display>
           <product-display></product-display>
           <product-display></product-display>
-          <product-display></product-display>
+          <app-review></app-review>
       </div>
 
 
-    <!-- installise app -->
+    <!-- import app -->
     <script src="./Main.js"></script>
     
-    <!-- installise components -->
+    <!-- import components -->
     <script src="./Components/ProductDisplay.js"></script>
+    <script src="./Components/ReviewForm.js"></script>
 
     <!--mount app-->
     <script>

@@ -1,4 +1,10 @@
-app.component('product-display',{
+app.component('product-display', {
+  props: {
+    premium: {
+      type: Boolean,
+      required: true
+    }
+  },
     template:
     /*Html*/
     `<!--Product-->
@@ -15,7 +21,7 @@ app.component('product-display',{
           <h1>{{ title }}</h1>
           <p v-if="inStock" class="stock" style="color: green">In stock</p>
           <p
-            v-else-if="inStock < 10 && indtock > 0"
+            v-else-if="inStock < 10 && inStock > 0"
             class="stock"
             style="color: rgb(247, 247, 10)"
           >
@@ -24,6 +30,7 @@ app.component('product-display',{
           <p v-else class="stock" style="color: rgb(191, 4, 4)">
             Out of stock
           </p>
+          <p class="page">shipping cost: {{ shipping }}</p>
 
           <!-- Detials -->
           <ul>
@@ -81,14 +88,14 @@ data: function() {
 },
 methods: {
     addToCart() {
-        this.cart += 1,
+        this.$emit('add-to-cart', this.variants[this.selectedVars].id),
         this.variants[this.selectedVars].stk -= 1
     },
     updateVar(index){
         this.selectedVars = index
     },
     removeFromCart(){
-        this.cart -= 1,
+        this.$emit('remove-from-cart')
         this.variants[this.selectedVars].stk += 1
     }
 },
@@ -101,7 +108,13 @@ computed:{
     },
     inStock(){
         return this.variants[this.selectedVars].stk
+    },
+    shipping(){
+        if (this.premium){
+          return 'Free'
+        }
+        return '29.-'
     }
 }
 
-}).mount('#component')
+})

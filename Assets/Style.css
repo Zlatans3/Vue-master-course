@@ -34,3 +34,10 @@ h1 {
 /*.product-info {
   text-align: right;
 }*/
+
+.form {
+  color:white;
+  float:inline-start;
+  width: 30%;
+  margin: 20px;
+}
